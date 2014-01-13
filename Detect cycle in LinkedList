@@ -98,7 +98,7 @@ public class LinkedList<T> {
                         slowItr = slowItr.getNext();
                         fastItr = fastItr.getNext();
                         
-                        if ( null == fastItr)
+                        if ( null == fastItr)  // Seen the tail and no cycle, return false
                                 return false; 
                         
                         // No need to check for null check for slow as fast 
