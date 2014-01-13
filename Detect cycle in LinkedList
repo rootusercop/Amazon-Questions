@@ -1,0 +1,114 @@
+package Amazon;
+
+public class LinkedList<T> {
+        
+        public static class LinkedListNode<T>
+        {
+                private T data;
+                private LinkedListNode<T> next;
+                
+                public T getData() {
+                        return data;
+                }
+                public void setData(T data) {
+                        this.data = data;
+                }
+                public LinkedListNode<T> getNext() {
+                        return next;
+                }
+                public void setNext(LinkedListNode<T> next) {
+                        this.next = next;
+                }
+                public LinkedListNode(T data) {
+                        super();
+                        this.data = data;
+                }
+                
+                @Override
+                public String toString() {
+                        return "LinkedListNode [data=" + data + "]";
+                }
+                
+        }
+        
+        private LinkedListNode<T> head = null;
+        private LinkedListNode<T> tail = null;
+        
+        public LinkedList()
+        {
+                head = null;
+        }
+        
+        public synchronized void addToBegin(T data)
+        {
+                LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+                newNode.setNext(head); // Also takes care of head == NULL
+                head = newNode;
+                if ( tail == null)
+                        tail = head;
+        }
+        
+        public synchronized void addToEnd(T data)
+        {
+                LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+                
+                if ( tail == null) // linkedlist is empty
+                {
+                        tail = head = newNode;
+                } else {
+                        tail.setNext(newNode);
+                        tail = newNode;
+                }
+        }
+
+        @Override
+        public String toString() {
+                
+                StringBuilder strBuilder = new StringBuilder();
+                LinkedListNode<T> itr = head;
+                while ( (itr != null) && (itr.getNext() != null))
+                {
+                        strBuilder.append(itr).append("\n");
+                        itr = itr.getNext();
+                }
+                
+                if ( itr != null)
+                        strBuilder.append(itr);
+                
+                return strBuilder.toString();
+        }
+        
+        public synchronized void insertCycle()
+        {
+                if ( null != tail)
+                        tail.setNext(head);
+        }
+        
+        
+        public synchronized boolean isCyclePresent()
+        {
+                LinkedListNode<T> slowItr = head;
+                LinkedListNode<T> fastItr = head;
+
+                if ( null == slowItr) 
+                        return false;   // No cycle in empty linked-list
+                
+                while ( true)
+                {
+                        slowItr = slowItr.getNext();
+                        fastItr = fastItr.getNext();
+                        
+                        if ( null == fastItr)
+                                return false; 
+                        
+                        // No need to check for null check for slow as fast 
+                        // is ahead and linked-list is expected to be static
+                        fastItr = fastItr.getNext();
+                        
+                        if ( null == fastItr)
+                                return false;
+                        else if ( fastItr == slowItr) // reference check alone is enough. No need for equals()
+                                return true;
+                }                
+        }
+}
