@@ -1,0 +1,95 @@
+  
+   
+   
+   Solution 1 -> Itearative Solution
+   
+    /* Maintain two stacks for this solution. Time O(n) and Space O(n) extra space */
+   
+   public static void printSpiralLevelOrder(Node node) {
+                if (node == null) { return ; }
+                Stack<Node> stackOne = new Stack<Node>();
+                Stack<Node> stackTwo = new Stack<Node>();
+                stackOne.add(node);
+                
+                while (!stackOne.isEmpty() || !stackTwo.isEmpty()) {                
+                        while (!stackOne.isEmpty()) {
+                                Node temp = stackOne.pop();
+                                System.out.print(temp.data + " ");
+                                if (temp.left != null) {
+                                        stackTwo.push(temp.left);
+                                }
+                                if (temp.right != null) {
+                                        stackTwo.push(temp.right);
+                                }
+                        }
+                        System.out.println();
+                        while (!stackTwo.isEmpty()) {
+                                Node temp = stackTwo.pop();
+                                System.out.print(temp.data + " ");
+                                if (temp.right != null) {
+                                        stackOne.push(temp.right);
+                                }
+                                if (temp.left != null) {
+                                        stackOne.push(temp.left);
+                                }
+                        }
+                        System.out.println();
+                }
+        }
+        
+        
+        Solution 2 -> Recursive Solution. Time Complexity O(n^2). Hence Iterative solution is much efficient than recursive
+        
+/**
+ * @File : Levelorder.java
+ * @Description : Class for printing level order in spiral form
+ * @author : Mohit
+ * 
+ */
+         public void printLevelorder(TreeNode first) {
+                // create object of BinaryTreeHeight
+                BinaryTreeHeight binaryTreeHeight = new BinaryTreeHeight();
+                // get height of root
+                int height = binaryTreeHeight.getHeight(first);
+
+                int flag = 1;
+                // print nodes recursively at every level
+                for (int i = 1; i <= height; i++) {
+                        printNodesatEveryLevel(i, first, flag);
+                        flag = ~flag;
+                }
+        }
+
+        /**
+         * Function for displaying nodes at every level
+         * 
+         * @param level
+         * @param first
+         * @param flag
+         */
+        public void printNodesatEveryLevel(int level, TreeNode first, int flag) {
+                if (first == null) {
+                        return;
+                }
+                // if level,print node
+                if (level == 1) {
+                        System.out.println(first.getData());
+                        // if level>1, print nodes recursively at every level
+                } else if (level > 1) {
+                        if (flag == 1) {
+                                // print nodes of left child
+                                printNodesatEveryLevel(level - 1, first.getLeft(), flag);
+                                // print nodes of right child
+                                printNodesatEveryLevel(level - 1, first.getRight(), flag);
+                        } else {
+                                // print nodes of right child
+                                printNodesatEveryLevel(level - 1, first.getRight(), flag);
+                                // print nodes of left child
+                                printNodesatEveryLevel(level - 1, first.getLeft(), flag);
+                        }
+                }
+        }
+
+        
+        
+        
