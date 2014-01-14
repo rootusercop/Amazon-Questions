@@ -15,7 +15,9 @@ public class FindMaxOccurenceNumber {
                 
                 // There can be more than on most frequent number. What should we do ?
                 // Assuming we need to print all of them.
-                
+                // The key of the map is the element and the value of the map is the count of that
+                // element in the MAP
+                // That is Map<element, its count>
                 Map<Integer, Integer> countMap = new HashMap<Integer,Integer>();
                 
                 for ( int i = 0 ; i < arr.length; i++ )
