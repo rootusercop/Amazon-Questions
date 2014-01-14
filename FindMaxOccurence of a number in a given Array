@@ -45,7 +45,7 @@ public class FindMaxOccurenceNumber {
                                 currMaxKeys.add(pair.getKey()); // Store the key
                                 currMax = pair.getValue();
                         } else if ( pair.getValue() == currMax) {
-                                currMaxKeys.add(pair.getKey());
+                                currMaxKeys.add(pair.getKey());  // If there is a tie, then add the second as well
                         }
                 }
                 
