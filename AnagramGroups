@@ -1,0 +1,176 @@
+Question: Given a list of strings, return a list of lists of strings that groups all anagrams. 
+
+Ex. given {trees, bike, cars, steer, arcs} 
+return { {cars, arcs}, {bike}, {trees, steer} } 
+
+m = # of words 
+n = length of longest word 
+
+Source: http://www.careercup.com/question?id=5723872416497664
+
+PLEASE READ THROUGH ALL THE "ANSWERS AND THEIR RESPECTIVE COMMENTS" TO UNDERSTAND THE REASON WHY MULTIPLE ANSWERS 
+TO THIS QUESTION IS GIVEN
+
+*******************Answer I) O(m*lgm*n*lgn) Time Complexity*******************
+
+package anagramGroups;
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class anagramGroups {
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+		System.out.println("Enter the number of elements you want to enter in the string array");
+		int n = in.nextInt();
+		System.out.println("Enter the elements of the string array");
+		String[] sArray = new String[n];
+		for(int i=0;i<n;i++){
+			sArray[i] = in.next();
+			sArray[i] = sortString(sArray[i]);
+		}
+		Arrays.sort(sArray);
+		printArray(sArray);
+		int count=0;
+		for(int i=0;i<n-1;i++){
+			if(sArray[i].equals(sArray[i+1])){
+				System.out.println("String at Index: "+i+" pairs with string at Index: "+(i+1));
+				count++;
+			}
+		}
+		if(count==0)
+			System.out.println("No anagram match found");
+	}
+	finally{
+		in.close();
+	}
+}
+private static void printArray(String[] sArray) {
+	System.out.println("Array elements are:");
+	for(int i=0;i<sArray.length;i++){
+		System.out.println(sArray[i].toString());
+	}
+}
+public static String sortString(String s){
+	char[] array = s.toCharArray();
+	Arrays.sort(array);
+	return String.valueOf(array);   // convert char array to String
+}
+
+}
+
+/*Analysis:
+	Time Complexity: O(m*lgm*n*logn), where m = No of Strings in String Array
+										n = Length of each string
+	Space Complexity: O(m*n)
+*/
+
+*******************Answer II) O(m*n) Time Complexity using Multiplicative Hash Function*******************
+
+package anagramGroups;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class SolutionUsingHashMap {
+
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+	System.out.println("Enter the number of elements in the array");
+	int n = in.nextInt();
+	String[] strArray = new String[n];
+	for(int i=0;i<n;i++)
+		strArray[i] = in.next();
+	HashMap<Long,ArrayList<String>> map = new HashMap<Long,ArrayList<String>>();
+	for(String s : strArray){
+		long hash = calculateHash(s);
+		if(!map.containsKey(hash))
+			map.put(hash, new ArrayList<String>());
+		map.get(hash).add(s);
+	}
+	printHashMap(map);
+	}
+	finally{
+		in.close();
+	}
+}
+public static void printHashMap(HashMap<Long, ArrayList<String>> map) {
+	for(ArrayList<String> s: map.values()){    // VERY IMP: values() method of HashMap returns a Collection of values in the HashMap
+		System.out.println(s);    // print the object of ArrayList by calling the toString method
+	}
+	
+}
+public static long calculateHash(String s){
+	long hash=1;
+	for(int i=0;i<s.length();i++)
+		hash*=s.charAt(i);
+	return hash;
+}
+
+}
+
+/*Analysis:
+	Time Complexity: O(m*n), where m = No of Strings in String Array
+							       n = Length of each string
+	Space Complexity: O(m*n)
+*/
+
+********************Answer III) O(m*n) Time Complexity using Intelligent(Run Length String Encoding) Hash Function***********
+package anagramGroups;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class SolutionUsingIntelligentHash {
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+	System.out.println("Enter the number of elements in the array");
+	int n = in.nextInt();
+	String[] strArray = new String[n];
+	for(int i=0;i<n;i++)
+		strArray[i] = in.next();
+	HashMap<String,ArrayList<String>> map = new HashMap<String,ArrayList<String>>();
+	for(String s : strArray){
+		String hash = intelligentHashFunction(s);
+		if(!map.containsKey(hash))
+			map.put(hash, new ArrayList<String>());
+		map.get(hash).add(s);
+	}
+	printHashMap(map);
+	}
+	finally{
+		in.close();
+	}
+}
+	
+	// Run Length Encoding HashFunction
+	public static String intelligentHashFunction(String s){
+		int[] charArray = new int[52];
+		for(int i=0;i<s.length();i++){
+			charArray[s.charAt(i)-'A']++;
+		}
+		StringBuilder str = new StringBuilder();
+		for(int i=0;i<charArray.length;i++){
+			if(charArray[i]!=0){
+				str.append((char)(i+'A')).append(charArray[i]);
+			}
+		}
+		return str.toString();
+	}
+	public static void printHashMap(HashMap<String, ArrayList<String>> map) {
+		for(ArrayList<String> s: map.values()){    // VERY IMP: values() method of HashMap returns a Collection of values in the HashMap
+			System.out.println(s);    // print the object of ArrayList by calling the toString method
+		}
+	}
+}
+/*Analysis:
+Time Complexity: O(m*n), where m = No of Strings in String Array
+						       n = Length of each string
+Space Complexity: O(m*n)
+*/
