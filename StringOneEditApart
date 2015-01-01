@@ -18,7 +18,7 @@ ans the space complexity will also be O(n^2) if edit distance algorithm is imple
 Source: http://www.careercup.com/question?id=5092486548553728
 */
 
-
+******************************************* Using Iteration ******************************************************
 package StringsOneEditApart;
 
 import java.util.Scanner;
@@ -70,3 +70,108 @@ Analysis:
 	Time Complexity = O(n)
 	Space Complexity = O(1)
 */
+
+******************************************* Using Iterative Edit Distance Algorithm *********************************
+package StringsOneEditApart;
+
+import java.util.Scanner;
+
+public class UsingIterativeEditDistanceAlgorithm {
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+		System.out.println("Enter the two strings for comparison");
+		String s1 = in.nextLine();
+		String s2 = in.nextLine();
+		if(iterativeEditDistanceAlgorithm(s1,s2)==1)
+			System.out.println("True");
+		else
+			System.out.println("False");
+	}
+	finally{
+		in.close();
+	}
+}
+private static int iterativeEditDistanceAlgorithm(String s1, String s2) {
+	int[][] table = new int[s1.length()+1][s2.length()+1];
+	for(int i=0;i<table.length;i++)
+		table[i][0]=0;
+	for(int i=0;i<table[0].length;i++)
+		table[0][i]=0;
+	
+	int left = 0;
+	int top = 0;
+	int corner=0;
+	for(int i=1;i<table.length;i++){
+		for(int j=1;j<table[0].length;j++){
+			left = table[i-1][j] + 1;
+			top = table[i][j-1] +1;
+			corner = table[i-1][j-1] + check(s1.charAt(i-1),s2.charAt(j-1));
+			table[i][j] = Math.min(Math.min(left,top), corner);
+		}
+	}
+	return table[table.length-1][table[0].length-1];
+}
+
+private static int check(char c1, char c2) {
+	if(c1==c2)
+		return 0;
+	return 1;
+}
+}
+/*
+Analysis:
+	Time Complexity = O(n^2)
+	Space Complexity = O(n^2)
+	*/
+	
+*********************************************** Using Recursive Edit Distance Algorithm ******************************
+package StringsOneEditApart;
+
+import java.util.Scanner;
+
+public class UsingRecursiveEditDistanceAlgorithm {
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+		System.out.println("Enter the two strings");
+		String s1 = in.nextLine();
+		String s2 = in.nextLine();
+		if(editDistanceAlgorithm(s1,s2, s1.length(), s2.length()) == 1)
+			System.out.println("True");
+		else
+			System.out.println("False");
+	}
+	finally{
+		in.close();	
+	}
+}
+
+private static int editDistanceAlgorithm(String s1, String s2, int m, int n) {
+	if(m==0 || n==0)
+		return 0;
+	if(m==0)
+		return n;
+	if(n==0)
+		return m;
+	
+	int left = editDistanceAlgorithm(s1, s2, m-1, n) + 1 ;
+	int top = editDistanceAlgorithm(s1, s2, m, n-1)+1;
+	int corner = editDistanceAlgorithm(s1, s2, m-1, n-1)+check(s1.charAt(m-1),s2.charAt(n-1));
+	
+	return (Math.min(Math.min(left,top), corner));
+}
+
+private static int check(char c1, char c2) {
+	if(c1==c2)
+		return 0;
+	else
+		return 1;
+}
+}
+/*
+Analysis:
+	Time Complexity = O(n^2) // However, not sure about this. Should learn calculating time compexity for recursive calls
+	Since its a recursive call, if stack frames are considered in memory consumption then a lot of memory
+	would be lost. The program might crash for 10^5 size strings. Hence if we need to use, edit distance algorithm,
+	we should consider using Iterative Edit Distance Algorithm*/
