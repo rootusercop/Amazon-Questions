@@ -13,17 +13,17 @@ xyz,xzy
 x, xyz
 
 NOTE: Can be done using EDIT-DISTANCE Algorithm, but IT WONT BE EFFICIENT since the time complexity will be O(n^2)
-ans the space complexity will also be O(n^2).
+ans the space complexity will also be O(n^2) if edit distance algorithm is implemented iteratively.
 
 Source: http://www.careercup.com/question?id=5092486548553728
 */
 
 
-package divideandconquer;
+package StringsOneEditApart;
 
 import java.util.Scanner;
 
-public class StringsOneEditApart {
+public class UsingIteration {
 public static void main(String[] args) {
 	Scanner in = new Scanner(System.in);
 	try{
@@ -55,8 +55,10 @@ private static boolean areOneEditApart(String s1, String s2) {
 		if(s1.charAt(i)!=s2.charAt(j)){
 			if(s1.substring(i+1, m).equals(s2.substring(j, n)))
 				return true;
-			if(s1.substring(i, m).equals(s2.substring(j+1, n)))
+			else if(s1.substring(i, m).equals(s2.substring(j+1, n)))
 				return true;
+			else
+				break;   // if it is not equal then break the loop and return false
 		}
 		
 	}
