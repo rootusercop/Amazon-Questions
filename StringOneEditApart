@@ -19,57 +19,59 @@ Source: http://www.careercup.com/question?id=5092486548553728
 */
 
 ******************************************* Using Iteration ******************************************************
+
 package StringsOneEditApart;
 
 import java.util.Scanner;
 
-public class UsingIteration {
+public class UsingIterativeEditDistanceAlgorithm {
 public static void main(String[] args) {
 	Scanner in = new Scanner(System.in);
 	try{
-		System.out.println("Enter the two strings");
+		System.out.println("Enter the two strings for comparison");
 		String s1 = in.nextLine();
 		String s2 = in.nextLine();
-		System.out.println(areOneEditApart(s1,s2));
+		if(iterativeEditDistanceAlgorithm(s1,s2)==1)
+			System.out.println("True");
+		else
+			System.out.println("False");
 	}
 	finally{
 		in.close();
 	}
 }
-
-private static boolean areOneEditApart(String s1, String s2) {
-	int m = s1.length();
-	int n = s2.length();
-	if(Math.abs(m-n) > 1)  // if length of both the strings differs more than 1
-		return false;
-	if(s1.equals(s2))   // if they are exactly same. That means they are NOT ONE EDIT apart
-		return false;
-	int i=0;
-	int j=0;
-	while(i < m && j < n){
-		if(s1.charAt(i)==s2.charAt(j)){
-			i++;
-			j++;
-			continue;
+private static int iterativeEditDistanceAlgorithm(String s1, String s2) {
+	int[][] table = new int[s1.length()+1][s2.length()+1];
+	for(int i=0;i<table.length;i++)
+		table[i][0]=0;
+	for(int i=0;i<table[0].length;i++)
+		table[0][i]=0;
+	
+	int left = 0;
+	int top = 0;
+	int corner=0;
+	for(int i=1;i<table.length;i++){
+		for(int j=1;j<table[0].length;j++){
+			left = table[i-1][j] + 1;
+			top = table[i][j-1] +1;
+			corner = table[i-1][j-1] + check(s1.charAt(i-1),s2.charAt(j-1));
+			table[i][j] = Math.min(Math.min(left,top), corner);
 		}
-		if(s1.charAt(i)!=s2.charAt(j)){
-			if(s1.substring(i+1, m).equals(s2.substring(j, n)))
-				return true;
-			else if(s1.substring(i, m).equals(s2.substring(j+1, n)))
-				return true;
-			else
-				break;   // if it is not equal then break the loop and return false
-		}
-		
 	}
-	return false;
+	return table[table.length-1][table[0].length-1];
+}
+
+private static int check(char c1, char c2) {
+	if(c1==c2)
+		return 0;
+	return 1;
 }
 }
 /*
 Analysis:
-	Time Complexity = O(n)
-	Space Complexity = O(1)
-*/
+	Time Complexity = O(n^2)
+	Space Complexity = O(n^2)
+	*/
 
 ******************************************* Using Iterative Edit Distance Algorithm *********************************
 package StringsOneEditApart;
@@ -171,7 +173,34 @@ private static int check(char c1, char c2) {
 }
 /*
 Analysis:
-	Time Complexity = O(n^2) // However, not sure about this. Should learn calculating time compexity for recursive calls
-	Since its a recursive call, if stack frames are considered in memory consumption then a lot of memory
-	would be lost. The program might crash for 10^5 size strings. Hence if we need to use, edit distance algorithm,
-	we should consider using Iterative Edit Distance Algorithm*/
+	I. Time Complexity:  O(3^(m+n-1)). This is an EXPONENTIAL time algorithm
+	
+	The recursion formula is,
+
+	T(m,n) = T(m-1,n-1) + T(m-1,n) + T(m,n-1) + 1
+	T(0,n) = n
+	T(m,0) = m
+	is right.
+
+	You can see, that every T(m,n) splits of into three paths. Due to every node runs in O(1) we only have to 
+	count the nodes.
+
+	A shortest path has the length min(m,n), so the (recursion)tree has at least 3min(m,n) nodes. But there are 
+	some paths that are longer. 
+	
+	You get the longest path by alternately reduce the first and the second string.
+	This path will have the length m+n-1, so the whole tree has at most 3m+n-1 nodes.
+
+	Let m = min(m,n). The tree contains also at least
+
+	enter image description here
+
+	different paths, one for each possible order of reducing n.
+
+	So Ω(2^(max(m,n))) and Ω(3^(min(m,n))) are lower bounds and O(3^(m+n-1)) is an upper bound.
+	
+	*
+	*I. Space Complexity: The space complexity of the algorithm is also EXPONENTIAL (since multiple
+	* recursive calls utilizes many stack frames. If the length of the strings is 10^5, the program might crash)
+	*
+	*/
