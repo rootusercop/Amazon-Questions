@@ -1,0 +1,124 @@
+Question: Given an array of integers. Move all non-zero elements to the left of all zero elements.
+
+Source: http://www.careercup.com/question?id=5668212962230272
+
+Solution: 
+I have given, two solutions:
+1. Using Single Pointer in the array
+2. Using Two Pointers in the array
+
+Both have Time Complexity = O(n) and Space Complexity = O(1)
+
+************************************ Using Two Pointers ****************************************************
+package MoveNonZeroToTheLeftOfZeroElementsInAnArray;
+
+import java.util.Scanner;
+
+public class UsingTwoPointersInTheArray {
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+		System.out.println("Enter the number of elements of the array");
+		int n = in.nextInt();
+		System.out.println("Enter the elements - zero and non-zero");
+		int[] a = new int[n];
+		for(int i=0;i<n;i++)
+			a[i]=in.nextInt();
+		a = moveElements(a);
+		printArray(a);
+	}
+	finally{
+		in.close();
+	}
+}
+
+private static void printArray(int[] a) {
+	for(int i=0;i<a.length;i++)
+		System.out.print(a[i]+" ");
+	System.out.println();
+}
+
+private static int[] moveElements(int[] a) {
+	int low = 0;
+	int high = a.length-1;
+	while(low<high){
+		if(a[low]==0 && a[high]!=0){
+			a=swap(a,low,high);
+			high--;
+			low++;
+			continue;
+			}
+		if(a[low]==0 && a[high]==0){
+			high--;
+		}
+		if(a[low]!=0 && a[high]==0){
+			low++;
+			high--;
+			}
+		if(a[low]!=0 && a[high]!=0){
+			low++;
+		}
+		}
+	return a;
+	}
+
+private static int[] swap(int[] a, int low, int high) {
+	a[low] = a[low]^a[high];
+	a[high] = a[low]^a[high];
+	a[low] = a[low]^a[high];
+	return a;
+	}
+}
+/*
+Analysis:
+	Time Complexity = O(n)
+	Space Complexity = O(1)
+*/
+
+************************************ Using Single Pointer ****************************************************
+package MoveNonZeroToTheLeftOfZeroElementsInAnArray;
+
+import java.util.Scanner;
+
+public class UsingSinglePointer {
+	public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+	System.out.println("Enter the number of elements in the array");
+	int n = in.nextInt();
+	System.out.println("Enter the elements of the array - zero and non zero");
+	int[] a = new int[n];
+	for(int i=0;i<n;i++)
+		a[i] = in.nextInt();
+	a = moveElements(a);
+	printArray(a);
+	}
+	finally{
+		in.close();
+		}
+	}
+	private static int[] moveElements(int[] a) {
+		int zeroPoisitionPointer = 0;    // initialize a pointer which points to the element which is 0 in the array.
+		                                 // assume initially this pointer is at position 0
+		for(int i=0;i<a.length;i++){     // This loop is only for iterating, it doesn't act like a second pointer.
+										 // Hence, there is only one pointer in this program(zeroPositionPointer)
+			if(a[i]!=0){                 // if the element is not 0, then shift to 0 position
+				a[zeroPoisitionPointer++] = a[i]; 
+			}
+		}
+		for(;zeroPoisitionPointer<a.length;zeroPoisitionPointer++) // fill the remaining array elements with 0
+			a[zeroPoisitionPointer]=0;
+		return a;
+	}
+	private static void printArray(int[] a) {
+		for(int i=0;i<a.length;i++)
+			System.out.print(a[i]+" ");
+		System.out.println();
+	}
+
+}
+/*
+Analysis:
+	Time Complexity = O(n)
+	Space Complexity = O(1)
+*/
