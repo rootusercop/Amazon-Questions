@@ -2,11 +2,48 @@ Question: We are given a char array, we need to calculate the powerset of the ch
 Source: http://www.geeksforgeeks.org/power-set/
 Solution:
 
+***************************** PowerSet Of IntegerArray UsingBitIncrement *********************************
 package PowerSetFromSet;
 
 import java.util.Scanner;
 
-public class UsingBitIncrement {
+public class PowerSetOfIntegerArrayUsingBitIncrement {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		try{
+			System.out.println("Enter the size of the integer array");
+			int n = in.nextInt();
+			System.out.println("Enter the elements of the integer array for powerset calculation");
+			int[] set = new int[n];
+			for(int i=0;i<n;i++)
+				 set[i] = in.nextInt();
+			printPowerSet(set);
+		}
+		finally{
+			in.close();
+		}
+	}
+
+	private static void printPowerSet(int[] set) {
+		for(int i=0;i<(int)Math.pow(2,set.length);i++){
+			for(int j=0;j<set.length;j++){ // loop which checks which bit is set in integer i
+				if(((i)&(1<<j))!=0) // HandRun this to understand how to check for set bits in an integer
+					System.out.print(set[j]);
+			}
+			System.out.println();
+		}
+	}
+}
+/*
+Analysis:
+	Time Complexity = O(n*2^n)
+	Space Complexity = O(1)*/
+***************************** PowerSet Of CharacterArray UsingBitIncrement *******************************
+package PowerSetFromSet;
+
+import java.util.Scanner;
+
+public class PowerSetOfChracterArrayUsingBitIncrement {
 public static void main(String[] args) {
 	Scanner in = new Scanner(System.in);
 	try{
@@ -25,6 +62,7 @@ private static void printPowerSet(char[] set) {
 	for(int i=0;i<totalElements;i++){
 		for(int j=0;j<set.length;j++){
 			if(((i) & (1<<j))!=0)   // For each bit of integer i, check which of the bits are set.
+				// HandRun the above statement in if condition, to understand how to check for set bits in an integer
 				System.out.print(set[j]);  // If bit is set, then print the corresponding character
 			}
 		System.out.println();
