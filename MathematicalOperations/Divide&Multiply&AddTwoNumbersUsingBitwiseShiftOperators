@@ -193,7 +193,7 @@ class UsingBitwiseShiftOperators{
 		if(b==0)
 			return a;
 		else
-			usingRecursiveBitwiseShiftOperators((a^b),(a&b)<<1);
+			return usingRecursiveBitwiseShiftOperators((a^b),(a&b)<<1);
 	}
 }
 
