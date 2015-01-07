@@ -1,5 +1,5 @@
 
-****************************** PART I. Divide two numbers using bitwise operations************************
+****************************** PART I. Divide two numbers using bitwise shift operations************************
 
 /*
 Question: Given dividen and divisor, return the quotient without using / operator
@@ -84,7 +84,7 @@ public class UsingShiftOperators {
 */
 
 
-****************************** PART II. Multiply two numbers using bitwise operations************************
+****************************** PART II. Multiply two numbers using bitwise shift operations************************
 
 /*
 Question: Multiply two numbers using bitwise operations
@@ -123,7 +123,7 @@ private static int multiplyUsingRussianPeasantAlgorithm(int a, int b) {
 	int result = 0;
 	while(b>0){
 		
-		if((b&1)!=0)   // check if 2nd number is odd
+		if((b&1)!=0)   // check if multiplicant(i.e. second number) is odd
 			result=result+a;
 		
 		// double first number
@@ -138,5 +138,67 @@ private static int multiplyUsingRussianPeasantAlgorithm(int a, int b) {
 /*
 Analysis:
 	Time Complexity = O(nlgn) where n = 2nd number
+	Space Complexity = O(1)
+*/
+
+****************************** PART III. Add two numbers using bitwise shift operations************************
+
+/*Question: Add two numbers without using arithmetic operators
+Source: http://www.geeksforgeeks.org/add-two-numbers-without-using-arithmetic-operators/
+Algorithm:
+Sum of two bits can be obtained by performing XOR (^) of the two bits. Carry bit can be obtained 
+by performing AND (&) of two bits.
+Above is simple Half Adder logic that can be used to add 2 single bits.
+We can extend this logic for integers. If x and y don’t have set bits at same position(s),
+then bitwise XOR (^) of x and y gives the sum of x and y. To incorporate common set bits also,
+bitwise AND (&) is used. Bitwise AND of x and y gives all carry bits.
+We calculate (x & y) << 1 and add it to x ^ y to get the required result
+*/
+
+package AdditionOfTwoNumbersWithBitwiseShiftOperators;
+
+import java.util.Scanner;
+
+class UsingBitwiseShiftOperators{
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		try{
+			System.out.println("Enter two integers for addition");
+			int a = in.nextInt();
+			int b = in.nextInt();
+			System.out.println("Addition result is: "+additionUsingBitwiseShiftOperators(a,b));
+			System.out.println("Using bitwise operators recursively: "+usingRecursiveBitwiseShiftOperators(a,b));
+		}
+		finally{
+			in.close();
+		}
+	}
+	public static int additionUsingBitwiseShiftOperators(int a, int b){
+		
+		// EXOR gives SUM
+		int sum=0;
+		// AND gives CARRY
+		int carry=0;
+		while(b!=0){
+			sum = a^b;
+			carry = a&b;
+			// copy sum to X
+			a=sum;
+			// copy left shift carry by 1 to Y
+			b=carry<<1;
+		}
+		return a;
+	}
+	public static int usingRecursiveBitwiseShiftOperators(int a, int b){
+		if(b==0)
+			return a;
+		else
+			usingRecursiveBitwiseShiftOperators((a^b),(a&b)<<1);
+	}
+}
+
+/*
+Analysis:
+	Time Complexity = O(n), since we are dealing with while loop 
 	Space Complexity = O(1)
 */
