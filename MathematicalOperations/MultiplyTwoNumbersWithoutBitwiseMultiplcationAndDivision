@@ -1,0 +1,46 @@
+/*
+Question:
+	Multiply two integers without using multiplication, division and bitwise operators, and no loops
+	
+Source: http://www.geeksforgeeks.org/multiply-two-numbers-without-using-multiply-division-bitwise-operators-and-no-loops/
+
+*/
+package MultiplyTwoNumbersWithoutBitwiseMultiplcationAndDivision;
+
+import java.util.Scanner;
+
+public class UsingRecursiveAddition {
+public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	try{
+		System.out.println("Enter two numbers for multiplication");
+		int m = in.nextInt();
+		int n = in.nextInt();
+		if(Math.abs(m)>Math.abs(n))
+			System.out.println(multiply(m,n));
+		else
+			System.out.println(multiply(n,m));
+	}
+	finally{
+		in.close();
+	}
+}
+
+private static int multiply(int m, int n) {
+	if(n==0)
+		return 0;
+	
+	if(n>0)
+		return (m+multiply(m, n-1));
+	
+	else  // n is a negative number
+		return (-(multiply(m, -n)));
+
+	
+	}
+}
+/*
+Analysis:
+	Time Complexity = O(n) where n is the smallest number out of the two numbers after comparing the mod
+	Space Complexity = O(1)
+*/
