@@ -1,3 +1,9 @@
+/*
+Algorithm:
+Use a slow pointer which would be increased by 1 in each iteration
+Use a fast pointer which would be increased by 2 in each iteration
+Check whether slow and fast pointer meet each other. If YES, then loop is detected. Otherwise, no loop present
+*/
 package Amazon;
 
 public class LinkedList<T> {
