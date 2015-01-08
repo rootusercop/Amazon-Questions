@@ -1,5 +1,5 @@
 
-****************************** PART I. Divide two numbers using bitwise shift operations************************
+****************************** PART I. Divide two numbers using bitwise shift operators************************
 
 /*
 Question: Given dividen and divisor, return the quotient without using / operator
@@ -84,7 +84,7 @@ public class UsingShiftOperators {
 */
 
 
-****************************** PART II. Multiply two numbers using bitwise shift operations************************
+****************************** PART II. Multiply two numbers using bitwise shift operators************************
 
 /*
 Question: Multiply two numbers using bitwise operations
@@ -141,7 +141,7 @@ Analysis:
 	Space Complexity = O(1)
 */
 
-****************************** PART III. Add two numbers using bitwise shift operations************************
+****************************** PART III. Add two numbers using bitwise shift operators************************
 
 /*Question: Add two numbers without using arithmetic operators
 Source: http://www.geeksforgeeks.org/add-two-numbers-without-using-arithmetic-operators/
