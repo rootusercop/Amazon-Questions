@@ -2,6 +2,13 @@
 Question: Given a set of non-negative integers, and a value sum, determine if there is a subset of the given set 
 with sum equal to given sum.
 
+
+
+
+VERY VERY IMPORTANT NOTE: The Recursive & DP approach WON'T WORK for NEGATIVE Numbers present either in ARRAY ELEMENTS OR SUM
+
+
+
 Examples: set[] = {3, 34, 4, 12, 5, 2}, sum = 9
 Output:  True  //There is a subset (4, 5) with sum 9.
 Let isSubSetSum(int set[], int n, int sum) be the function to find whether there is a subset of set[] with 
@@ -15,7 +22,7 @@ YouTube Helper Links: https://www.youtube.com/watch?v=GdZSzita5V8
 					  https://www.youtube.com/watch?v=hi-Ec4jYyII
 
 */
-package SubsetSumProblemReturnTrueOrFalse;
+package SubsetSumProblem;
 
 import java.util.Scanner;
 
@@ -39,9 +46,13 @@ public static void main(String[] args) {
 	}
 }
 
-
+/*
+VERY VERY IMPORTANT NOTE: The Recursive & DP approach WON'T WORK for NEGATIVE Numbers present either in ARRAY ELEMENTS OR SUM
+*/
 private static boolean usingRecursion(int[] a,int length, int sum) {
-	
+	/*
+	VERY VERY IMPORTANT NOTE: The Recursive & DP approach WON'T WORK for NEGATIVE Numbers present either in ARRAY ELEMENTS OR SUM
+	*/
 	// 1. Base Cases
 	if(sum==0)
 		return true;
@@ -69,10 +80,16 @@ Analysis:
 	Space Complexity =       // Don't know
 */
 
+/*
+VERY VERY IMPORTANT NOTE: The Recursive & DP approach WON'T WORK for NEGATIVE Numbers present either in ARRAY ELEMENTS OR SUM
+*/
 private static boolean usingDP(int[] a, int sum) {
 	// using boolean matrix for DP
 	boolean dp[][] = new boolean[a.length+1][sum+1];  // +1 in row and column
-	
+
+	/*
+	VERY VERY IMPORTANT NOTE: The Recursive DP approach WON'T WORK for NEGATIVE Numbers present either in ARRAY ELEMENTS OR SUM
+	*/
 	
 	// if the length of the array is variable (and sum is 0) then fill TRUE, since the SUM=0 
 	for(int row=0;row<dp.length;row++){
