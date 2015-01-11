@@ -19,9 +19,9 @@ Solution Source: http://codereview.stackexchange.com/questions/36214/find-all-su
 
 Algorithm:
 Perform a recursive DFS - the element from an array can either be or not be in the set, 
-hence the solution is O(2^N) time complexity. Pick one number with index 'i' and check the 
-sum with arrayElement + stack_sum is less than or equal to the target sum. If yes, then add the element
-to the stack and also add the element to the stack_sum 
+hence the solution is O(2^n) time complexity, where n = number of elements in the input array.
+Pick one number with index 'i' and check the sum with arrayElement + stack_sum is less than or equal to
+the target sum. If yes, then add the element to the stack and also add the element to the stack_sum 
 
 The key point is to keep a track of a sequence of numbers in each recursive call. 
 To achieve this one can use a single Stack. The number of elements on the stack corresponds 
