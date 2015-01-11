@@ -1,6 +1,9 @@
 
 ********************************* This program RETURNS ALL the subsets if many subsets are present**************
 /*
+
+NOTE: The elements in this array can also be NEGATIVE. The program finds all the subsets even it negative numbers
+are present.
 Question:Print all subset of a given set which sums up to ZERO 
 		{8,3,5,1,-4,-8} 
 		so answer will be : {8,-8} 
@@ -71,7 +74,7 @@ public class GetAllSubsetByStack {
  
     public static void main(String[] args) {
     	
-    	int[] DATA = { 6,5,1,2,4,3};
+    	int[] DATA = { 10,5,1,-2,4,3};   // Negative Numbers are also accepted
 
         GetAllSubsetByStack get = new GetAllSubsetByStack();
         get.populateSubset(DATA, 0, DATA.length);
