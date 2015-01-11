@@ -7,7 +7,9 @@ Question:Print all subset of a given set which sums up to ZERO
 		{3,5,-8} 
 		{3,1,-4} 
 
-Source: http://www.careercup.com/forumpost?id=5355201013743616
+Question Source: http://www.careercup.com/forumpost?id=5355201013743616
+				 http://www.careercup.com/question?id=12899672
+				 http://www.careercup.com/question?id=6241189850251264
 	
 Solution Source: http://codereview.stackexchange.com/questions/36214/find-all-subsets-of-an-int-array-whose-sums-equal-a-given-target
 
@@ -75,7 +77,6 @@ public class GetAllSubsetByStack {
         get.populateSubset(DATA, 0, DATA.length);
     }
 }
-
 ********************************* This program only returns one subset if many subsets are present**************
 package SubsetSumProblem;
 
