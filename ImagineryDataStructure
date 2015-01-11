@@ -1,0 +1,36 @@
+Question: How can you design a data structure that can do the following operations in O(1) time: 
+Insert, Delete, Search, Max which returns the maximum number 
+
+Question Source: http://www.careercup.com/question?id=5082499984130048
+
+Solution
+I know delete, search and insert can be done O(1) time in a hashmap 
+with a proper hash function. But max is not possible in O(1) time
+Such datastructure/algorithm is impossible on a turing machine. 
+
+PROOF BY CONTRADICTION: 
+suppose this data structure exists. If this is the case then we can build general purpose comparison 
+sorting algorithm by pushing all data to this structure and then pulling one-by-one using max and delete operations 
+with O(N) complexity. However we know, that no comparison sorting algorithm on a turing machine can give 
+us no better than O(NlogN).
+
+Now, we're engineers let's solve the problem :) 
+Given the proof above, the only possible loophole here - is to avoid using turing machine model. 
+Since question is asked at Amazon where interviewers are passionate about scale I'd propose to parallelize 
+the computation and leverage O(N) processors/computers. 
+In this model all requested operations (including search) can be implemented with time complexity O(1)
+
+> how can N processors find out max element in O(1)?
+Easy. For instance, we create a distributed "linked list" using N processors, where each processor stores single 
+number and we keep all numbers/processors sorted. In order to organize a linked list, each processor might keep 
+an index of the peer. Finding MAX() in this case is single message round-trip with the last processor, since it
+holds the maximum.
+insert, delete and search operations are implemented by broadcasting to all processors, and in worst case
+the processor might forward the data the peer at most once. 
+Insert is the most complex operation here. It can be implemented in O(1) time complexity in following way. 
+Let's say processor receives a broadcasted message with instruction to insert number X. If it is the last processor
+then new processor is allocated and becomes the last one. If it is not he last processor, but X greater 
+than the number which is stored locally, it asks the processor on the right whether its number is equal or
+less than X - if reply is positive then new processor is allocated and "inserted" in between of those two, 
+otherwise nothing happens.
+
