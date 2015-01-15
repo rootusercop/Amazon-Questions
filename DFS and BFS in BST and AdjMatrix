@@ -171,12 +171,10 @@ public class UsingStackAndQueue
 /*
 Analysis(For both DFS and BFS):
 Source: http://stackoverflow.com/questions/11468621/why-is-the-time-complexity-of-both-dfs-and-bfs-o-v-e
-	Time Complexity = O(n+e) where n=nodes, e=edges
+	Time Complexity = O(n^2) where n=nodes [Since we are using adj. matrix hence the 
+	time complexity of dfs OR bfs is O(n^2), if adj list was used then the time complexity
+	would be O(n+e) where n = nodes, e = edges]
 	Space Complexity = O(n) + O(n) = O(2n)   where,
 	first O(n) is used to store nodes [which is used either for Stack(dfs) OR Queue(bfs)]
 	second O(n) is used to store the visited nodes array of size n where n=nodes
 */
-
-
-
-**************************************End of DFS and BFS in Adjacency Matrix(or Graph) *********************
