@@ -204,11 +204,6 @@ class IntervalComparator implements Comparator<Interval>{
 */
 	@Override
 	public int compare(Interval a, Interval b) {
-		if(a.startTime > b.startTime)
-			return 1;
-		else if(a.startTime < b.startTime)
-			return -1;
-		else
-			return 0;
-		}
+		return a.startTime-b.startTime;
+	}
 }
