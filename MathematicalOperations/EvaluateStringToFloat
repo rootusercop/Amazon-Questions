@@ -2,6 +2,10 @@
 Question: Write atof in Java, which converts a string representation of a float (like "342.18E-10") 
 to an actual float without using any built-in parsing functions.
 
+For Example: Meaning of  4.21E10 meaning ?
+Ans: 4.21 x10^10 (Answer Source: https://answers.yahoo.com/question/index?qid=20100915180740AALkWaT)
+
+
 Source: http://www.careercup.com/question?id=4901629824335872	
 */
 
@@ -69,5 +73,8 @@ public class EvaluateStringToFloat {
 		System.out.println(a.result);
 		EvaluateStringToFloat b = new EvaluateStringToFloat("342.18E-10");
 		System.out.println(b.result);
+		// Example of float
+		float f=(float) 342.18E-10;
+		System.out.println(f);
 	}
 }
