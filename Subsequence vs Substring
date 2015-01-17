@@ -9,4 +9,6 @@ The ALGORITHMS for finding both are also DIFFERENT:
 2. For Substring:
   We use,
         1. KMP (Knuth–Morris–Pratt) algorithm
+        URL: http://www.quora.com/What-is-the-best-resource-to-learn-KMP-Algorithm
         2. Rabin-Karp algorithm
+        URL: 
