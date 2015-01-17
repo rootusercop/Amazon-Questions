@@ -12,7 +12,7 @@ The ALGORITHMS for finding both are also DIFFERENT:
         URL: http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/
              http://www.quora.com/What-is-the-best-resource-to-learn-KMP-Algorithm
         2. Rabin-Karp algorithm
-        URL: 
+        URL: http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=stringSearching
 
 
 	In actual understanding, subsequence and substring are DIFFERENT.
