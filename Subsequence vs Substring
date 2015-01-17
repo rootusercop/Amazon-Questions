@@ -41,7 +41,9 @@ Source: http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in
 
 The Knuth-Morris-Pratt Algorithm in my own words
 DEC 13TH, 2009 | COMMENTS
-For the past few days, I’ve been reading various explanations of the Knuth-Morris-Pratt string searching algorithms. For some reason, none of the explanations were doing it for me. I kept banging my head against a brick wall once I started reading “the prefix of the suffix of the prefix of the…”.
+For the past few days, I’ve been reading various explanations of the Knuth-Morris-Pratt string searching algorithms.
+For some reason, none of the explanations were doing it for me. I kept banging my head against a brick wall once 
+I started reading “the prefix of the suffix of the prefix of the…”.
 
 Finally, after reading the same paragraph of CLRS over and over for about 30 minutes, I decided to sit down,
 do a bunch of examples, and diagram them out. I now understand the algorithm, and can explain it.
