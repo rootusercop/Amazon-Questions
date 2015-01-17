@@ -12,3 +12,23 @@ The ALGORITHMS for finding both are also DIFFERENT:
         URL: http://www.quora.com/What-is-the-best-resource-to-learn-KMP-Algorithm
         2. Rabin-Karp algorithm
         URL: 
+
+
+	In actual understanding, subsequence and substring are DIFFERENT.
+	However Java developers implemented these two methods to return the same output.
+	For Example:
+	(Example Source: http://mytactics.blogspot.com/2013/10/difference-between-subsequence-and.html)
+	class StringSeqSub{
+    public static void main(String args[])
+    	{
+        String str = "Hello World.!!";
+        // String s1 = str.subSequence(0, 5);    // this line will throw error
+        CharSequence s1 = str.subSequence(0, 5);
+        String s2 = str.substring(0, 5);
+        System.out.println(s1);
+        System.out.println(s2);
+    	} 
+	}
+Output - 
+Hello
+Hello
