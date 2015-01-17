@@ -1,0 +1,12 @@
+The difference between them, can cearly be made out from the following readings:
+http://en.wikipedia.org/wiki/Subsequence
+http://en.wikipedia.org/wiki/Substring
+
+
+The ALGORITHMS for finding both are also DIFFERENT:
+1. For Subsequnece:
+  We use the traditional LCS algorithm
+2. For Substring:
+  We use,
+        1. KMP (Knuth–Morris–Pratt) algorithm
+        2. Rabin-Karp algorithm
