@@ -1,0 +1,145 @@
+
+/*
+ * Question: Convert a binary search tree to a circular doubly-linked list
+ * 
+ * Source: http://www.careercup.com/question?id=5156120807079936
+ * 
+ * Algorithm: 1. Visit every node using in-order traversal, In every visit keep track of previous node
+ * 			  2. Make previous.next = current
+ * 				 Make current.previous = previous
+ */
+
+package BSTToCircularDLL;
+
+public class UsingInorderTraversal {
+	
+	static Node prev,head;
+public static void main(String[] args) {
+	BST bst=BinSearchTree.makeTree();
+	convertBSTToCircularDLL(bst.root);
+	//printDLL(head);
+}
+
+/*private static void printDLL(Node n) {
+
+	while(n!=null){
+		System.out.print(n.data+" ");
+		n=n.rchild;
+	}
+}
+*/
+private static void convertBSTToCircularDLL(Node n) {
+	if(n==null)
+		return;
+	convertBSTToCircularDLL(n.lchild);
+	if(prev==null){  // first node in list
+		head=n;
+	}
+	else{
+		prev.rchild = n;
+		n.lchild = prev;
+	}
+	prev = n;
+	convertBSTToCircularDLL(n.rchild);
+	if(prev.rchild==null){ // last node in list
+		head.lchild = prev;
+		prev.rchild = head;
+	}
+}
+/*
+ * Analysis:
+ *      Time Complexity = O(n) where n = number of nodes in the BST
+ *      Space Complexity = O(1)
+ */
+
+}
+class Node{
+	public int data;
+	public Node lchild;   // Note that: for DLL, left will act as Previous Node
+	public Node rchild;   // Note that: for DLL, right will act as Next Node
+	
+	public Node(int data) {
+	this.data=data;
+	lchild=null;
+	rchild=null;
+	}
+}
+
+class BST {
+public Node root=null;
+
+	public void addNode(Node n){
+		if(root==null)
+		{
+			root=n;
+			System.out.println(n.data+" added as the root to the tree");
+		}
+		else{
+			
+			Node current=root;
+			Node parent;
+			while(true){
+				parent=current;
+				
+				if(n.data<current.data){
+					current=current.lchild;
+					if(current==null){
+						parent.lchild=n;
+						return;
+					}
+				}
+				else{
+					current=current.rchild;
+					if(current==null){
+						parent.rchild=n;
+						return;
+					}
+				}
+				
+			}
+		}
+		
+	}
+	public void display(){
+		display(root);
+		System.out.println();
+	}
+	
+	public void display(Node n){
+		Node tempNode=n;
+		if(tempNode==null)
+			return;
+		else{
+		    display(tempNode.lchild);
+			System.out.print(tempNode.data+" ");
+			display(tempNode.rchild);
+		}
+	}
+	
+}
+class BinSearchTree{
+	
+	public static BST makeTree() {
+		BST myTree=new BST();
+		System.out.println("Adding the elemets");
+		myTree.addNode(new Node(40));
+		myTree.addNode(new Node(50));
+		myTree.addNode(new Node(30));
+		myTree.addNode(new Node(80));
+		myTree.addNode(new Node(20));
+		myTree.addNode(new Node(10));
+		myTree.addNode(new Node(5));
+		myTree.addNode(new Node(85));
+		myTree.addNode(new Node(35));
+		myTree.addNode(new Node(45));
+		myTree.addNode(new Node(32));
+		myTree.addNode(new Node(15));
+		myTree.addNode(new Node(38));
+		myTree.addNode(new Node(36));
+		myTree.display();
+		
+		return myTree;
+	}
+}
+		
+		
