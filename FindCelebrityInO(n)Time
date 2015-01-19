@@ -79,9 +79,6 @@ Does 4 know 5? No. Eliminate 5
 
 package findCelebs;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class FindCelebrity {
 	static int knows[][];      // global variable
 
