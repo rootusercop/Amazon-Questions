@@ -104,14 +104,14 @@ public class UsingNodeLevels {
 		
 		System.out.println("The LCA of e and h which are in DIFFERENT LEVEL DIFFERENT TREES is: "+getLCA(e, h));
 		System.out.println("The LCA of c and h which are in SAME LEVEL DIFFERENT TREES is: "+getLCA(c, h));
-		System.out.println("The LCA of d and c which are in DIFFERENT LEVEL SAME TREES is: "+getLCA(d, c).data);
-		System.out.println("The LCA of f and e which are in SAME LEVEL SAME TREES is: "+getLCA(f, e).data);
+		System.out.println("The LCA of d and c which are in DIFFERENT LEVEL SAME TREES is: "+getLCA(d, c));
+		System.out.println("The LCA of f and e which are in SAME LEVEL SAME TREES is: "+getLCA(f, e));
 		
 	}
 	
 	
 	
-	public static Node getLCA(Node a, Node b){
+	public static Character getLCA(Node a, Node b){
 		int level1 = getLevel(a);
 		int level2 = getLevel(b);
 		
@@ -143,7 +143,7 @@ public class UsingNodeLevels {
 			return null;
 		
 		// if a and b belong to same trees then either return a.data OR b.data
-		return a;  // OR return b.data;
+		return a.data;  // OR return b.data;
 		
 		
 	}
