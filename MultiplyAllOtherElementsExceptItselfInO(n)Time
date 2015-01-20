@@ -22,16 +22,15 @@ Source: http://www.careercup.com/question?id=5179916190482432
 
 // maintain two arrays which can be done in O(n)
 
-arr1 = 2,  6,   6,  24 (arrays multiply each number with previous and current)
-arr2 = 24, 12, 4, 4    (arrays multiplied from end)
+Put arr1[0]=1
+    arr2[arr2.length-1]=1;
 
-In above two arrays, replace beginning of arr1 with 1 and ending with 1
-arr1 = 1,  6,   6,  24
-arr2 = 24, 12, 4, 1
+arr1 = 1, 2,  6,  6  (arrays multiply each number with previous and current starting from 1 to (n-1))
+arr2 = 12, 4, 4 , 1  (arrays multiplied from end starting from (n-2) to 0)
 
 Then to find number at index 'i' you would just do:
 
-arr1[i]*arr2[i+1]
+output[i]=arr1[i]*arr2[i]    (arrays multiplied starting from 0 to (n-1))
  */
 
 package MultiplyAllOtherElementsExceptItself;
