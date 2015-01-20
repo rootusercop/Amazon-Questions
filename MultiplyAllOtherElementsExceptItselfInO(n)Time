@@ -22,7 +22,7 @@ Source: http://www.careercup.com/question?id=5179916190482432
 
 // maintain two arrays which can be done in O(n)
 
-Put arr1[0]=1
+Put arr1[0]=1;
     arr2[arr2.length-1]=1;
 
 arr1 = 1, 2,  6,  6  (arrays multiply each number with previous and current starting from 1 to (n-1))
