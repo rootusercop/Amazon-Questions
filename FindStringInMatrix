@@ -50,10 +50,11 @@ public static boolean patternMatch(char[][] matrix,int rowLength,int columnLengt
 	int[] columnDir = new int[]{1, 0, -1, -1, -1, 0, 1, 1};
 	
 	/*
-	 THREE conditions we have to check before making the current position as VISITED
+	 FOUR conditions we have to check before making the current position as VISITED
 	 1. check whether the pattern length is 0
 	 2. check whether the search is out of bounds
-	 3. check whether the first character of pattern matches with the current position of matrix OR current position is already VISITED
+	 3. check whether the first character of pattern matches with the current position of matrix
+	 4. current position is already VISITED then return false
 	*/ 
 	if(pattern.length()==0)
 		return true;
