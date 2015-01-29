@@ -1,0 +1,232 @@
+***************************** I. Using DP **********************************************
+
+
+/*
+ * Question: Find the length of the longest INCREASING subsequence in an array
+ * 
+Solution Source: http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/
+https://www.youtube.com/watch?v=U-xOVWlcgmM
+http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+http://robentan.blogspot.com/2011/11/more-efficient-algorithm-for-longest.html
+http://stackoverflow.com/questions/6129682/longest-increasing-subsequenceonlogn
+
+
+ */
+
+package LongestIncreasingSubsequence;
+
+import java.util.Scanner;
+
+public class UsingDP {
+	   public static void main(String[] args){
+		   
+		   Scanner in = new Scanner(System.in);
+		   try{
+		    System.out.println("Enter the number of elements of the array");
+		    int n = in.nextInt();
+		    int[] a = new int[n];
+		    System.out.println("Enter the elements of the array");
+		    for(int i=0;i<n;i++)
+		        a[i]= in.nextInt();
+		        
+		    System.out.println("The length of longest increasing subsequence of the array is: "+longestIncreasingSubsequence(a));
+		    
+		   }
+		   finally{
+			   in.close();
+		   }
+		   }
+		    public static int longestIncreasingSubsequence(int[] a){
+		    
+		    	if(a.length==0 || a==null)
+		    		return -1;
+		    	
+		        int[] aux = new int[a.length];
+		        
+		        
+		        for(int i=0;i<a.length;i++){
+		            aux[i]=1 ;    // initialize the aux with 1 since the length of longest subsequence would atleast be 1
+		            for(int j=0;j<i;j++){
+		                if(a[i]>a[j])
+		                    aux[i] = Math.max(aux[j]+1,aux[i]);                
+		            }
+		        }
+		        
+		        
+		        
+		        int max = 0;
+		        for(int i=0;i<aux.length;i++)
+		            if(aux[i]>max)
+		                max = aux[i];
+		        
+		        return max;       
+		    
+		    }
+}
+/*
+ * Analysis:
+ * Time Eomplexity = O(n^2)
+ * Space Complexity = O(n) used by the aux array
+ */
+
+******************************************* Using NlgN solution *********************************
+
+/*
+ * Question: Find the length of the longest INCREASING subsequence in an array
+ * 
+Solution Source: http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/
+https://www.youtube.com/watch?v=U-xOVWlcgmM
+http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+http://robentan.blogspot.com/2011/11/more-efficient-algorithm-for-longest.html
+http://stackoverflow.com/questions/6129682/longest-increasing-subsequenceonlogn
+
+
+ */
+package LongestIncreasingSubsequence;
+
+import java.util.Scanner;
+
+public class UsingNlogNAlgorithm {
+	 public static void main(String[] args){
+		   
+		   Scanner in = new Scanner(System.in);
+		   try{
+		    System.out.println("Enter the number of elements of the array");
+		    int n = in.nextInt();
+		    int[] a = new int[n];
+		    System.out.println("Enter the elements of the array");
+		    for(int i=0;i<n;i++)
+		        a[i]= in.nextInt();
+		        
+		    System.out.println("The length of longest increasing subsequence of the array is: "+LongestIncreasingSubsequenceLength(a,a.length));
+		    
+		   }
+		   finally{
+			   in.close();
+		   }
+		   }
+	 
+	 
+	// Binary search (note boundaries in the caller)
+	// A[] is ceilIndex in the caller
+	public static int CeilIndex(int A[], int l, int r, int key) {
+	    int m;
+	 
+	    while( r - l > 1 ) {
+	        m = l + (r - l)/2;
+	        if(A[m] >= key)
+	        	r=m;
+	        else
+	        	l=m;
+	    }
+	 
+	    return r;
+	}
+	public static int LongestIncreasingSubsequenceLength(int A[], int size) {
+	    // Add boundary case, when array size is one
+	 
+	    int[] tailTable   = new int[size];
+	    int len; // always points empty slot
+	
+	 
+	    tailTable[0] = A[0];
+	    len = 1;
+	    for( int i = 1; i < size; i++ ) {
+	        if( A[i] < tailTable[0] )
+	            // new smallest value
+	            tailTable[0] = A[i];
+	        else if( A[i] > tailTable[len-1] )
+	            // A[i] wants to extend largest subsequence
+	            tailTable[len++] = A[i];
+	        else
+	            // A[i] wants to be current end candidate of an existing subsequence
+	            // It will replace ceil value in tailTable
+	            tailTable[CeilIndex(tailTable, -1, len-1, A[i])] = A[i];
+	    }
+
+	 
+	    return len;
+	}
+/*
+ * Analysis:
+ * Time Complexity = O(nlgn)
+ * Space Complexity = O(1)
+ */
+	
+}
+********************************* Using Recursion *****************************************
+
+/*
+ * Question: Find the length of the longest INCREASING subsequence in an array
+ * 
+Solution Source: http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/
+https://www.youtube.com/watch?v=U-xOVWlcgmM
+http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+http://robentan.blogspot.com/2011/11/more-efficient-algorithm-for-longest.html
+http://stackoverflow.com/questions/6129682/longest-increasing-subsequenceonlogn
+
+
+ */
+
+
+package LongestIncreasingSubsequence;
+
+import java.util.Scanner;
+
+public class UsingRecursion {
+	 public static void main(String[] args){
+		   
+		   Scanner in = new Scanner(System.in);
+		   try{
+		    System.out.println("Enter the number of elements of the array");
+		    int n = in.nextInt();
+		    int[] a = new int[n];
+		    System.out.println("Enter the elements of the array");
+		    for(int i=0;i<n;i++)
+		        a[i]= in.nextInt();
+		        
+		    System.out.println("The length of longest increasing subsequence of the array is: "+usingRecursionSolution(a,a.length));
+		    
+		   }
+		   finally{
+			   in.close();
+		   }
+		   }
+
+	
+	 public static int usingRecursionSolution(int[] a, int n){
+	       
+		 if(a.length==0 || a==null)
+	    		return -1;
+		 
+		 int maxDiff=1; // the maxDifference would at least be 1
+	       
+	     return usingRecursionSolution(a,n,maxDiff);
+	        
+	    }
+	    private static int usingRecursionSolution(int[] a, int n, int maxDiff) {
+	    	if(n==1)
+	            return 1;
+	            
+	        int res=1;
+	        int maxEnding = 1;
+	        
+	        for(int i=1;i<n;i++){
+	            res = usingRecursionSolution(a,i,maxDiff);
+	            if(a[n-1] > a[i-1])
+	                maxEnding = Math.max(maxEnding, res+1);
+	        }
+	        
+	        if(maxEnding>maxDiff)
+	            maxDiff = maxEnding;
+	        
+	        return maxDiff;
+	    }
+	    /*
+	    Analysis:
+	    Time Complexity = O(n^2)
+	    Space Complexity = O(1)
+	    */
+}
+
+
